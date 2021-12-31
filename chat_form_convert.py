@@ -1,6 +1,6 @@
 import os
 
-# 讀取檔案
+# 讀取檔案 return(list)
 def read_file(filename):
 	all_chat = []
 
@@ -9,7 +9,7 @@ def read_file(filename):
 			all_chat.append(line)
 		return all_chat
 
-# 介面轉換
+# 介面轉換 return(list)
 def conveter(chat_list=[]):
 	all_chat = []
 	name = ''
