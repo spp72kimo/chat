@@ -14,10 +14,7 @@ def conveter(chat_list=[]):
 	all_chat = []
 	name = ''
 	for line in chat_list:
-		if 'Allen' in line:
-			name = line.strip()
-			continue
-		if 'Tom' in line:
+		if ('Allen' in line) or ('Tom' in line):
 			name = line.strip()
 			continue
 		chat = line.strip()
@@ -28,7 +25,6 @@ def conveter(chat_list=[]):
 def write_file(filename,chat_list=[]):
 	with open(filename, 'w', encoding = 'utf-8') as f:
 		for line in chat_list:
-			print(line)
 			f.write(line)
 
 def main():
