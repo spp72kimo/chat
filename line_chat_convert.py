@@ -20,8 +20,8 @@ def real_name(chat_list=[], key_name=''):
 	chat_line = []
 	for line in chat_list:
 		chat_line = line.split()
-		if len(chat_line) >= 3:
-			if key_name in chat_line[1]:
+		if len(chat_line) > 2:
+			if key_name.lower() in chat_line[1].lower():
 			 	return (chat_line[1])
 
 # 整理個人對話資料 return(list)
