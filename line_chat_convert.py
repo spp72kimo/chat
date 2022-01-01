@@ -30,12 +30,21 @@ def indi_chat(chat_list=[], name=None):
 		print('沒有設定名字')
 		return
 	chat = []
+	line_list = []
 	line_load = []
 	for line in chat_list:
-		if name in line:
-			line_load = line.split()
-			chat.append(line_load[3:])
-		chat.append(name)
+		line_list = line.split()
+		if len(line_list) > 1:
+			if name == line_list[1]: 
+				if name == 'Chow':
+					if len(line_list) < 3:
+						continue
+					chat.append(line_list[2]) 
+				else:
+					if len(line_list) < 4:
+						continue
+					chat.append(line_list[3]) 
+	chat.append(name)
 	return chat
 
 # 次數分析 return(list)
@@ -56,17 +65,22 @@ def counter(chat_list=[]):
 		else:	
 			msg_count += len(line)
 
-	result.append(['name', chat_list[len(chat_list) - 1]])
-	result.append(['msg', msg_count])
-	result.append(['voice', voice_count])
-	result.append(['sticker', sticker_count])
+	result.append(['名字', chat_list[len(chat_list) - 1]])
+	result.append(['字數', msg_count])
+	result.append(['語音', voice_count])
+	result.append(['貼圖', sticker_count])
 	return result
 
 # 列印分析結果
-def printer(result_list=[]):
+def printer(result_list=[], session=0):
 	print('')
-	for line in result_list:
-		print(line[0],': ', line[1], sep = '')
+	if session == 1:
+		for line in result_list:
+			print(line[0],': ', line[1], sep = '')
+	elif session == 2:
+		msg = ''
+		for line in result_list:
+			print(line)
 
 # 選單狀態 return(int)
 def input_menu():
@@ -80,7 +94,6 @@ def input_menu():
 			return choice
 
 
-
 def main():
 	filename = 'LINE.txt'
 	while True:
@@ -91,11 +104,15 @@ def main():
 			name = real_name(chat_list, name)
 			indi_chat_list = indi_chat(chat_list, name)
 			result = counter(indi_chat_list)
-			printer(result)
+			printer(result, choice)
 			print('\n')
 
 		elif choice == 2:
-			print('建置當中！')
+			name = input('name:')
+			chat_list = read_file('LINE.txt')
+			name = real_name(chat_list, name)
+			indi_chat_list = indi_chat(chat_list, name)
+			printer(indi_chat_list, choice)
 			print('\n')
 		elif choice == 0:
 			print('程式結束！')
