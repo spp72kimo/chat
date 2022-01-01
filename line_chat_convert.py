@@ -80,6 +80,9 @@ def printer(result_list=[], session=0):
 	elif session == 2:
 		msg = ''
 		for line in result_list:
+			if ('[照片]' in line) or ('[語音訊息]' in line) or ('[貼圖]' in line) or ('[檔案]' in line):
+				continue
+
 			print(line)
 
 # 選單狀態 return(int)
