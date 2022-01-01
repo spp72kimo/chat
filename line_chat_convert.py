@@ -10,13 +10,22 @@ def read_file(filename):
 		return all_chat
 
 # 寫入檔案
-def write_file(filename,chat_list=[]):
+def write_file(filename, chat_list=[]):
 	with open(filename, 'w', encoding = 'utf-8') as f:
 		for line in chat_list:
 			f.write(line)
 
+#確認名字 return(str)
+def real_name(chat_list=[], key_name=''):
+	chat_line = []
+	for line in chat_list:
+		chat_line = line.split()
+		if len(chat_line) >= 3:
+			if key_name in chat_line[1]:
+			 	return (chat_line[1])
+
 # 整理個人對話資料 return(list)
-def indi_chat(chat_list=[],name=None):
+def indi_chat(chat_list=[], name=None):
 	if name == None:
 		print('沒有設定名字')
 		return
@@ -53,17 +62,19 @@ def counter(chat_list=[]):
 	result.append(['sticker', sticker_count])
 	return result
 
-
 # 列印分析結果
 def printer(result_list=[]):
 	print('')
 	for line in result_list:
 		print(line[0],': ', line[1], sep = '')
 
+
+
 def main():
 	filename = 'LINE.txt'
 	name = input('name:')
 	chat_list = read_file('LINE.txt')
+	name = real_name(chat_list, name)
 	indi_chat_list = indi_chat(chat_list, name)
 	result = counter(indi_chat_list)
 	printer(result)
