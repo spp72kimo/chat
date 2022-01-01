@@ -68,15 +68,37 @@ def printer(result_list=[]):
 	for line in result_list:
 		print(line[0],': ', line[1], sep = '')
 
+# 選單狀態 return(int)
+def input_menu():
+	choice = 0
+	print('1.聊天內容分析')
+	print('2.顯示指定對象聊天內容')
+	print('0.離開程式')
+	while True:
+		choice = input('請選擇：')
+		if (choice == '0') or (choice == '1') or (choice == '2'):
+			return choice
+
 
 
 def main():
 	filename = 'LINE.txt'
-	name = input('name:')
-	chat_list = read_file('LINE.txt')
-	name = real_name(chat_list, name)
-	indi_chat_list = indi_chat(chat_list, name)
-	result = counter(indi_chat_list)
-	printer(result)
+	while True:
+		choice = int(input_menu())
+		if choice == 1:
+			name = input('name:')
+			chat_list = read_file('LINE.txt')
+			name = real_name(chat_list, name)
+			indi_chat_list = indi_chat(chat_list, name)
+			result = counter(indi_chat_list)
+			printer(result)
+			print('\n')
+
+		elif choice == 2:
+			print('建置當中！')
+			print('\n')
+		elif choice == 0:
+			print('程式結束！')
+			break
 
 main()
